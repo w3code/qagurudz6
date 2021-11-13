@@ -9,20 +9,20 @@ import org.junit.jupiter.api.Test;
 public class StepAnnotatedTest {
 
     private static final String REPOSITORY = "nextcloud/docker";
-    private static final Integer ISSUE_NUMBER = 1628;
+    private static final String ISSUE_TITLE = "no app in context in logs";
 
     private WebSteps steps = new WebSteps();
 
     @Test
     @Owner("w3code")
-    @DisplayName("Поиск Issue")
+    @DisplayName("Find issue by title")
     @Link(name = "GitHub", url="https://github.com")
     public void testGithub() {
         steps.openMainPage();
         steps.searchForRepository(REPOSITORY);
         steps.goToRepository(REPOSITORY);
         steps.openIssueTab();
-        steps.shouldSeeIssueWithNumber(ISSUE_NUMBER);
+        steps.shouldSeeIssueWithTitle(ISSUE_TITLE);
     }
 
 }

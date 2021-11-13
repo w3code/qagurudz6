@@ -16,30 +16,30 @@ import static org.openqa.selenium.By.partialLinkText;
 public class StepLambdaTest {
 
     private static final String REPOSITORY = "nextcloud/docker";
-    private static final Integer ISSUE_NUMBER = 1628;
+    private static final String ISSUE_TITLE = "no app in context in logs";
 
     @Test
     @Owner("w3code")
-    @DisplayName("Поиск Issue")
+    @DisplayName("Find issue by title")
     @Link(name = "GitHub", url="https://github.com")
     public void testGithub() {
-        step("Открываем главную страницу", () -> {
+        step("Open main page", () -> {
             open("https://github.com");
         });
-        step("Ищем репозиторий " + REPOSITORY, () -> {
+        step("Find repository '" + REPOSITORY + "'", () -> {
             $(".header-search-input").click();
             $(".header-search-input").sendKeys(REPOSITORY);
             $(".header-search-input").submit();
         });
-        step("Переходим в репозиторий " + REPOSITORY, () -> {
+        step("Open the '" + REPOSITORY + "' repository", () -> {
             $(linkText(REPOSITORY)).click();
 
         });
-        step("Открываем таб Issues", () -> {
+        step("Open the Issues tab", () -> {
             $(partialLinkText("Issues")).click();
         });
-        step("Проверяем, что Issue #"+ ISSUE_NUMBER + " существует", () -> {
-            $(withText("#" + ISSUE_NUMBER)).should(Condition.visible);
+        step("Check Issue with '"+ ISSUE_TITLE + "' title is exists", () -> {
+            $(withText(ISSUE_TITLE)).should(Condition.visible);
         });
     }
 

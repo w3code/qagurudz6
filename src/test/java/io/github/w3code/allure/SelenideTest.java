@@ -16,9 +16,12 @@ import static org.openqa.selenium.By.partialLinkText;
 
 public class SelenideTest {
 
+    private static final String REPOSITORY = "nextcloud/docker";
+    private static final String ISSUE_TITLE = "no app in context in logs";
+
     @Test
     @Owner("w3code")
-    @DisplayName("Поиск Issue")
+    @DisplayName("Find issue by title")
     @Link(name = "GitHub", url = "https://github.com")
     public void testGithub() {
         SelenideLogger.addListener("allure", new AllureSelenide());
@@ -26,12 +29,12 @@ public class SelenideTest {
         open("https://github.com");
 
         $(".header-search-input").click();
-        $(".header-search-input").sendKeys("nextcloud/docker");
+        $(".header-search-input").sendKeys(REPOSITORY);
         $(".header-search-input").submit();
 
-        $(linkText("nextcloud/docker")).click();
+        $(linkText(REPOSITORY)).click();
         $(partialLinkText("Issues")).click();
-        $(withText("#1628")).should(Condition.visible);
+        $(withText(ISSUE_TITLE)).should(Condition.visible);
     }
 
 }

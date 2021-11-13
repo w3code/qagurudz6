@@ -11,30 +11,30 @@ import static org.openqa.selenium.By.partialLinkText;
 
 public class WebSteps {
 
-    @Step("Открываем главную страницу")
+    @Step("Open main page")
     public void openMainPage() {
         open("https://github.com");
     }
 
-    @Step("Переходим в репозиторий {repository}")
+    @Step("Find repository '{repository}'")
     public void searchForRepository(String repository) {
         $(".header-search-input").click();
         $(".header-search-input").sendKeys(repository);
         $(".header-search-input").submit();
     }
 
-    @Step("Переходим в репозиторий {repository}")
+    @Step("Open the {repository}")
     public void goToRepository(String repository) {
         $(linkText(repository)).click();
     }
 
-    @Step("Открываем таб Issues")
+    @Step("Open the Issues tab")
     public void openIssueTab() {
         $(partialLinkText("Issues")).click();
     }
 
-    @Step("Проверяем, что Issue #{issueNumber} существует")
-    public void shouldSeeIssueWithNumber(int issueNumber) {
-        $(withText("#" + issueNumber)).should(Condition.visible);
+    @Step("Check Issue with '{issueTitle}' title is exists")
+    public void shouldSeeIssueWithTitle(String issueTitle) {
+        $(withText(issueTitle)).should(Condition.visible);
     }
 }
